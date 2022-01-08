@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Clothing Store Inventory Tracker</string>
+    <string name="app_name_short">Clothes</string>
 </resources>
