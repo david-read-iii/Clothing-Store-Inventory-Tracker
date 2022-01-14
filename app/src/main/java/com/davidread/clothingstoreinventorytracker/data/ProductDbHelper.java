@@ -41,12 +41,12 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_PRODUCTS_TABLE = "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + " ("
-                + ProductContract.ProductEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ProductContract.ProductEntry.COLUMN_NAME + "TEXT NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PRICE + "INTEGER NOT NULL DEFAULT 0, "
-                + ProductContract.ProductEntry.COLUMN_QUANTITY + "INTEGER NOT NULL DEFAULT 0, "
-                + ProductContract.ProductEntry.COLUMN_SUPPLIER + "TEXT NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PICTURE + "BLOB NOT NULL);";
+                + ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ProductContract.ProductEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + ProductContract.ProductEntry.COLUMN_PRICE + " INTEGER NOT NULL DEFAULT 0, "
+                + ProductContract.ProductEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + ProductContract.ProductEntry.COLUMN_SUPPLIER + " TEXT NOT NULL, "
+                + ProductContract.ProductEntry.COLUMN_PICTURE + " BLOB NOT NULL);";
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
 
@@ -54,9 +54,9 @@ public class ProductDbHelper extends SQLiteOpenHelper {
      * Callback method invoked when the database schema is upgraded. The database schema will not
      * be upgraded, so it does nothing.
      *
-     * @param db            {@link SQLiteDatabase} being upgraded.
-     * @param oldVersion    The old database version.
-     * @param newVersion    The new database version.
+     * @param db         {@link SQLiteDatabase} being upgraded.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Clothing Store Inventory Tracker</string>
     <string name="app_name_short">Clothes</string>
+    <string name="insert_failed_message">Insert failed</string>
+    <string name="query_failed_message">Query failed</string>
+    <string name="delete_failed_message">Delete failed</string>
+    <string name="action_add_dummy_label">Add Dummy Row</string>
+    <string name="action_delete_all_label">Delete All Rows</string>
 </resources>

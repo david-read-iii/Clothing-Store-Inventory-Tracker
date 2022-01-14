@@ -21,6 +21,11 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name=".data.ProductProvider"
+            android:authorities="com.davidread.clothingstoreinventorytracker"
+            android:exported="false" />
+
     </application>
 
 </manifest>
