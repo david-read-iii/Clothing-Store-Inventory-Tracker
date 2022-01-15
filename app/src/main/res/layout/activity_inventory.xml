@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InventoryActivity">
 
-    <TextView
-        android:id="@+id/database_info_text_view"
+    <!-- Inventory RecyclerView. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/inventory_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/activity_padding" />
+        android:layout_height="match_parent" />
 
-</ScrollView>
+    <!-- Empty view set visible when RecyclerView is empty. -->
+    <LinearLayout
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/PrimaryTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_view_primary_label" />
+
+        <TextView
+            style="@style/SecondaryTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_view_secondary_label" />
+
+    </LinearLayout>
+
+</RelativeLayout>

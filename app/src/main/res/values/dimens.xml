@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_padding">16dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+    <dimen name="list_item_divider_horizontal_margin">16dp</dimen>
+    <dimen name="quantity_button_size">48dp</dimen>
+    <dimen name="quantity_text_view_horizontal_margin">8dp</dimen>
 </resources>

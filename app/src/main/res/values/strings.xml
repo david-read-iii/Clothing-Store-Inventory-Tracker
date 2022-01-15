@@ -6,4 +6,8 @@
     <string name="delete_failed_message">Delete failed</string>
     <string name="action_add_dummy_label">Add Dummy Row</string>
     <string name="action_delete_all_label">Delete All Rows</string>
+    <string name="decrement_button_label">-</string>
+    <string name="increment_button_label">+</string>
+    <string name="empty_view_primary_label">It\'s a bit lonely here…</string>
+    <string name="empty_view_secondary_label">Get started by adding a product</string>
 </resources>
