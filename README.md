@@ -14,5 +14,5 @@ git clone git@github.com:david-read-iii/Clothing-Store-Inventory-Tracker.git
 6. Install the artifact on your Android device and try it out.
 
 # Maintainers
-This project is mantained by:
+This project is maintained by:
 * [David Read](http://github.com/david-read-iii)
