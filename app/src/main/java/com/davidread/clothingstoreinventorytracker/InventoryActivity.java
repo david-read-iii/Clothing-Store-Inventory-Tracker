@@ -2,6 +2,10 @@ package com.davidread.clothingstoreinventorytracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,12 +13,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.davidread.clothingstoreinventorytracker.data.ProductContract.ProductEntry;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -26,20 +29,40 @@ import java.util.Random;
 public class InventoryActivity extends AppCompatActivity {
 
     /**
-     * {@link TextView} to display info about the data stored within the
-     * {@link com.davidread.clothingstoreinventorytracker.data.ProductProvider}.
+     * {@link ProductCursorAdapter} for adapting a {@link Cursor} of product data to be displayed
+     * in a {@link RecyclerView}.
      */
-    private TextView databaseInfoTextView;
+    private ProductCursorAdapter productCursorAdapter;
 
     /**
-     * Callback method invoked to initialize the activity. It simply initializes
-     * {@link #databaseInfoTextView} and makes an initial call to {@link #queryRows()}.
+     * {@link View} for displaying a message when the {@link RecyclerView} is empty.
+     */
+    private View emptyView;
+
+    /**
+     * Callback method invoked to initialize the activity. Initializes global helper objects, sets
+     * up the activity's {@link RecyclerView}, and makes initial call to
+     * {@link InventoryActivity#queryRows()}.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-        databaseInfoTextView = findViewById(R.id.database_info_text_view);
+
+        // Initialize global ProductCursorAdapter with no Cursor to adapt yet.
+        productCursorAdapter = new ProductCursorAdapter();
+
+        // Initialize RecyclerView.
+        RecyclerView recyclerView = findViewById(R.id.inventory_recycler_view);
+        recyclerView.setAdapter(productCursorAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        // Initialize empty View.
+        emptyView = findViewById(R.id.empty_view);
+
+        // Initial call to query ProductProvider.
         queryRows();
     }
 
@@ -142,8 +165,8 @@ public class InventoryActivity extends AppCompatActivity {
 
     /**
      * Queries the {@link com.davidread.clothingstoreinventorytracker.data.ProductProvider} for all
-     * its data. It updates the {@link #databaseInfoTextView} with information returned by the
-     * query and pops a toast if the query operation fails.
+     * its data. It updates the {@link #productCursorAdapter} with the fetched {@link Cursor} and
+     * pops a toast if the query operation fails.
      */
     private void queryRows() {
 
@@ -162,21 +185,15 @@ public class InventoryActivity extends AppCompatActivity {
             return;
         }
 
-        // Populate the database info TextView with information retrieved from the query.
-        databaseInfoTextView.setText("");
-        databaseInfoTextView.append("Count=" + cursor.getCount() + "\n");
-        databaseInfoTextView.append("Columns=" + Arrays.toString(cursor.getColumnNames()) + "\n");
-        while (cursor.moveToNext()) {
-            databaseInfoTextView.append("\n" +
-                    cursor.getString(0) + ", " +
-                    cursor.getString(1) + ", " +
-                    cursor.getString(2) + ", " +
-                    cursor.getString(3) + ", " +
-                    cursor.getString(4) + ", " +
-                    Arrays.toString(cursor.getBlob(5))
-            );
+        // Update ProductCursorAdapter with new Cursor.
+        productCursorAdapter.changeCursor(cursor);
+
+        // Update visibility of empty View depending on the size of the Cursor.
+        if (productCursorAdapter.getItemCount() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            emptyView.setVisibility(View.GONE);
         }
-        cursor.close();
     }
 
     /**

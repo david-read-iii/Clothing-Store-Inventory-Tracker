@@ -144,18 +144,18 @@ public class ProductCursorAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     public void changeCursor(Cursor newCursor) {
 
-        // Close the old Cursor.
+        // Notify RecyclerView to remove old Cursor data set and close the old Cursor.
         if (cursor != null) {
+            notifyItemRangeRemoved(0, getItemCount());
             cursor.close();
         }
 
         // Assign the new Cursor.
         cursor = newCursor;
 
-        // Notify RecyclerView of data set change.
-        notifyItemRangeRemoved(0, getItemCount());
+        // Notify RecyclerView to insert new Cursor data set.
         if (newCursor != null) {
-            notifyItemRangeInserted(0, getItemCount());
+            notifyItemRangeInserted(0, newCursor.getCount());
         }
     }
 
